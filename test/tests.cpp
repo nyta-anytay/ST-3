@@ -26,11 +26,11 @@ class MockDoor : public Door {
 class TimedDoorTest : public ::testing::Test {
  protected:
   TimedDoor* door;
-  
+
   void SetUp() override {
     door = new TimedDoor(1);
   }
-  
+
   void TearDown() override {
     delete door;
   }
@@ -86,7 +86,7 @@ TEST_F(TimedDoorTest, ThrowStateThrowsException) {
 TEST(TimedDoorParameterTest, DifferentTimeoutValues) {
   TimedDoor door1(5);
   TimedDoor door2(10);
-  
+
   EXPECT_EQ(door1.getTimeOut(), 5);
   EXPECT_EQ(door2.getTimeOut(), 10);
 }
@@ -94,13 +94,13 @@ TEST(TimedDoorParameterTest, DifferentTimeoutValues) {
 
 TEST(MockDoorTest, DoorInterfaceMocking) {
   MockDoor mockDoor;
-  
+
   EXPECT_CALL(mockDoor, lock())
       .Times(1);
   EXPECT_CALL(mockDoor, isDoorOpened())
       .Times(1)
       .WillOnce(Return(false));
-  
+
   mockDoor.lock();
   EXPECT_FALSE(mockDoor.isDoorOpened());
 }
@@ -108,10 +108,10 @@ TEST(MockDoorTest, DoorInterfaceMocking) {
 
 TEST(MockTimerClientTest, TimerClientInterfaceMocking) {
   MockTimerClient mockClient;
-  
+
   EXPECT_CALL(mockClient, Timeout())
       .Times(AtLeast(1));
-  
+
   mockClient.Timeout();
 }
 
